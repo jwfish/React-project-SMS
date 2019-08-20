@@ -1,6 +1,6 @@
 import { Component as WeElement, createElement as h } from "react";
 import styled from "styled-components";
-import { Form, Input, Button, Radio, Icon } from "antd";
+import { Form, Input, Button,  Icon } from "antd";
 const { TextArea } = Input;
 const StyledComponents = styled.div`
   p {

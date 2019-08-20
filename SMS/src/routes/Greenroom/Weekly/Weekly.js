@@ -5,31 +5,32 @@ import {
     Form,
     Input,
     Button,
-    Radio,
     Icon
 } from 'antd';
 import { Table } from 'antd';
+
+
 const { TextArea } = Input;
 const columns = [
     {
         title: '姓名',
         dataIndex: 'name',
-        render: text => <a>{text}</a>,
+        render: text => <a>{text}</a>,align:'center'
     },
     {
         title: '周报标题',
         className: 'column-money',
-        dataIndex: 'money',
+        dataIndex: 'money',align:'center'
     },
     {
         title: '周报内容',
-        dataIndex: 'address',
+        dataIndex: 'address',align:'center'
     }, {
         title: '周报状态',
-        dataIndex: 'state',
+        dataIndex: 'state',align:'center'
     }, {
         title: '创建时间',
-        dataIndex: 'time',
+        dataIndex: 'time',align:'center'
     }
 ];
 
@@ -107,12 +108,14 @@ export default class Weekly extends Component {
                 </div>
 
                 <div style={{ marginTop: '20px' }}>
-                    <Table
+                    <Table 
                         columns={columns}
                         dataSource={data}
                         bordered
                         // title={() => 'Header'}
                         footer={() => ''}
+
+                        pagination={false}//分页器
                     />
                 </div>
             </div>

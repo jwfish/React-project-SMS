@@ -4,7 +4,9 @@
   ],
   "theme": {
     "@primary-color": "#1890ff",
-    "@border-radius-base":"0px"
+    "@border-radius-base":"0px",
+    "@table-padding-vertical": "10px",
+    "@table-padding-horizontal": "8px"
   }
   
 }

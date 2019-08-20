@@ -16,7 +16,7 @@ function RouterConfig({ history }) {
         {/* 重定向 */}
         <Redirect from="/"
           to={{
-            pathname: "/home",
+            pathname: "/home/Weekly",
           }}
         />
       </Switch>

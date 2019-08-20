@@ -9,7 +9,11 @@ import Technology from '../../routes/Greenroom/Technology/Technology';
 import Itemupload from '../../routes/Greenroom/Itemupload/Itemupload';
 import Stuvip from '../../routes/Greenroom/Stuvip/Stuvip';
 import Weekly from '../../routes/Greenroom/Weekly/Weekly';
-
+import Moneydetail from '../../routes/Greenroom/Moneydetail/Moneydetail';
+import Index from '../../routes/Greenroom/Index/Index';
+import Exam from '../../routes/Greenroom/Exam/Exam';
+import Discipline from '../../routes/Checking/Discipline/Discipline';
+import Leave from '../../routes/Checking/Leave/Leave';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -37,19 +41,19 @@ export default class Elayout extends Component {
             url: '/home/Weekly'
         }, {
             title: '我的资料',
-            url: '/ppp'
+            url: '/home/Index'
         }, {
             title: '交费明细',
-            url: '/ppp'
+            url: '/home/Moneydetail'
         }, {
             title: '参加考试',
-            url: '/ooo'
+            url: '/home/Exam'
         }, {
             title: '学员评价',
-            url: '/fafa'
+            url: '/home'
         }, {
             title: '教学测评',
-            url: '/iii'
+            url: '/home'
         }]
     }
     render() {
@@ -94,15 +98,17 @@ export default class Elayout extends Component {
                                 <SubMenu
                                     key="sub2"
                                     title={
-                                        <span>
-                                            <Icon type="laptop" />
+                                        <span style={{ fontWeight: '800', color: '#2b7dbc', fontSize: '13px' }}>
+                                            <Icon type="barcode" />
                                             学员考勤
                                         </span>
                                     }
                                 >
-                                    <Menu.Item key="10">学员请假</Menu.Item>
-                                    <Menu.Item key="11">学员违纪</Menu.Item>
+                                    <Menu.Item key="10">
+                                        <Link to={'/home/Leave'}>学员请假</Link>
 
+                                    </Menu.Item>
+                                    <Menu.Item key="11"> <Link to={'/home/Discipline'}>学员违纪</Link></Menu.Item>
                                 </SubMenu>
 
                             </Menu>
@@ -121,12 +127,19 @@ export default class Elayout extends Component {
                                     minHeight: 280,
                                 }}
                             >
+
+
                                 <Switch>
                                     <Route path="/home/complaint" component={Complaint} />
                                     <Route path="/home/Technology" component={Technology} />
                                     <Route path="/home/Itemupload" component={Itemupload} />
                                     <Route path="/home/Stuvip" component={Stuvip} />
                                     <Route path="/home/Weekly" component={Weekly} />
+                                    <Route path="/home/Moneydetail" component={Moneydetail} />
+                                    <Route path="/home/Index" component={Index} />
+                                    <Route path="/home/Exam" component={Exam} />
+                                    <Route path="/home/Discipline" component={Discipline} />
+                                    <Route path="/home/Leave" component={Leave} />
 
                                 </Switch>
 
