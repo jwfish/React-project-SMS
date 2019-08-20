@@ -1,0 +1,61 @@
+<template name="Component-name">
+  <div style={{padding:'16px 12px',border:'1px solid #c5d0dc'}}>
+    <Form>
+
+      <Form.Item label="学员姓名：" labelCol={{ span: 4 }} wrapperCol={{ span: 3 }}>
+        <Input placeholder="还没吃酸菜鱼" disabled style={{cursor:"default"}} />
+      </Form.Item>
+      <Form.Item label="问题内容：" labelCol={{ span: 4 }} wrapperCol={{ span: 14 }}>
+        <TextArea rows={4} placeholder="请输入技术内容" />
+        <!-- <Input placeholder="input placeholder" /> -->
+      </Form.Item>
+      
+      <div style={{ width: '50%', margin: "30px auto 0", textAlign: "CENTER" }}>
+
+            <Button type="primary" size="large" style={{backgroundColor:"#6fb3e0",borderColor: "#6fb3e0"}}>
+                <Icon type="check" />
+                确定
+            </Button>
+            <Button style={{ backgroundColor: "#abbac3", borderColor: "#abbac3", color: "#fff", marginLeft: "100px" }} size="large">
+                <Icon type="undo" />
+                返回
+            </Button>
+
+
+
+        </div>
+    </Form>
+  </div>
+</template>
+
+<script>
+  // JS
+
+  import {
+    Form,
+    Input,
+    Button,
+    Radio,
+    Icon
+  } from 'antd';
+  const { TextArea } = Input;
+
+
+  export default class {
+    constructor(props) {
+      super(props)
+      this.state = {
+
+      }
+    }
+    componentDidMount() {}
+  }
+
+</script>
+<style lang="scss">
+  /* CSS */
+  p {
+    color: #000;
+  }
+
+</style>

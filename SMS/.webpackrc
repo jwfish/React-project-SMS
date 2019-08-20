@@ -1,0 +1,10 @@
+{
+  "extraBabelPlugins": [
+    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true }]
+  ],
+  "theme": {
+    "@primary-color": "#1890ff",
+    "@border-radius-base":"0px"
+  }
+  
+}
