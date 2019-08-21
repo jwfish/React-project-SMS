@@ -38,4 +38,5 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+console.log('启动服务器');
 module.exports = app;

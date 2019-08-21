@@ -8,7 +8,7 @@ import {
     Icon
 } from 'antd';
 import { Table } from 'antd';
-
+import styles from './Weekly.css';
 
 const { TextArea } = Input;
 const columns = [
@@ -112,9 +112,14 @@ export default class Weekly extends Component {
                         columns={columns}
                         dataSource={data}
                         bordered
+                        size="small"//尺寸小
                         // title={() => 'Header'}
                         footer={() => ''}
-
+                        rowClassName={(record, index) => {//隔行变色
+                            let className = styles.lightRow;
+                            if (index % 2 === 1) className = styles.darkRow;
+                            return className;
+                        }}
                         pagination={false}//分页器
                     />
                 </div>

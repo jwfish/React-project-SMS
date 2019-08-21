@@ -13,6 +13,7 @@ import { Table } from 'antd';
 
 import styles from './Leave.css'
 import moment from "moment";//时间
+
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
@@ -153,6 +154,11 @@ class Leave extends Component {
                         footer={() => ''}
 
                         pagination={false}//分页器
+                        rowClassName={(record, index) => {//隔行变色
+                            let className = styles.darkRow;
+                            if (index % 2 === 1) className = styles.lightRow;
+                            return className;
+                        }}
                     />
                 </div>
 

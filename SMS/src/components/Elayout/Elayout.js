@@ -14,6 +14,8 @@ import Index from '../../routes/Greenroom/Index/Index';
 import Exam from '../../routes/Greenroom/Exam/Exam';
 import Discipline from '../../routes/Checking/Discipline/Discipline';
 import Leave from '../../routes/Checking/Leave/Leave';
+import Evaluate from '../../routes/Greenroom/Evaluate/Evaluate';
+import Inquiry from '../../routes/Greenroom/Inquiry/Inquiry'
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -50,16 +52,16 @@ export default class Elayout extends Component {
             url: '/home/Exam'
         }, {
             title: '学员评价',
-            url: '/home'
+            url: '/home/Evaluate'
         }, {
             title: '教学测评',
-            url: '/home'
+            url: '/home/Inquiry'
         }]
     }
     render() {
         return (
             <div style={{ height: '100%', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
-                <Layout style={{ height: '100%' }}>
+                <Layout style={{ height: '100%',overflow: 'auto' }}>
                     <Header className="header" style={{ background: '#428bca', height: '50px' }}>
                         <div className="logo" style={{ lineHeight: '50px' }}>
                             <img style={{ height: '50px' }} src="http://stu.1000phone.net/Public/assets/css/images/logo.png?1566207048" alt="" />
@@ -125,6 +127,7 @@ export default class Elayout extends Component {
                                     padding: 24,
                                     margin: 0,
                                     minHeight: 280,
+                                    overflow: 'auto'
                                 }}
                             >
 
@@ -140,6 +143,8 @@ export default class Elayout extends Component {
                                     <Route path="/home/Exam" component={Exam} />
                                     <Route path="/home/Discipline" component={Discipline} />
                                     <Route path="/home/Leave" component={Leave} />
+                                    <Route path="/home/Evaluate" component={Evaluate} />
+                                    <Route path="/home/Inquiry" component={Inquiry} />
 
                                 </Switch>
 
