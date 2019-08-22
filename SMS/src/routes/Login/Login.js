@@ -1,371 +1,100 @@
-import { Component as WeElement, createElement as h } from "react";
-import styled from "styled-components";
-const StyledComponents = styled.div`
-  /* CSS */
-  body {
-  }
+import React, {
+  Component
+} from 'react'
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import styles from './Login.css'
+import Qs from 'qs'
+class Login extends Component {
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields(async (err, values) => {
+      if (!err) {//获取到表单的值
+        console.log(values.username, values.password);
 
-  html,
-  body,
-  #root {
-    background-color: #000;
-  }
+        await React.$axios({
+          method: 'post',
+          url: 'http://localhost:3000/login',
+          data: Qs.stringify({
+            name: values.username,
+            password: values.password
+          }
+          ), headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }).then((resolve) => {
+          console.log(resolve);
+          if (resolve.data.data.length) {
+            console.log('登录成功');
+            document.cookie = "tokenpw=" + resolve.data.token;
+            //编程时导航跳转
+            this.props.history.push("/home/complaint");
+          } else {
+            console.log('登录失败');
+          }
+        })
 
-  .login {
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    background: #f9f9f9;
-  }
+        // console.log(data);
 
-  p {
-    color: #000;
-  }
+        // // document.cookie = "name=" + "huahua";
+        // console.log(data.data.data.length);
 
-  .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    height: 300px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 5px 20px 0 #ddd;
-  }
 
-  .font-weight-normal {
-    font-weight: 400 !important;
-  }
+      }
+    });
+  };
 
-  .mb-3,
-  .my-3 {
-    margin-bottom: 1rem !important;
-    text-align: center;
-    color: #478fca !important;
-    font-weight: normal;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    -webkit-clip-path: inset(50%);
-    clip-path: inset(50%);
-    border: 0;
-  }
-
-  label {
-    display: inline-block;
-    margin-bottom: 0.5rem;
-  }
-
-  .form-control {
-    display: block;
-    width: 100%;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    /* border-radius: .25rem; */
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    margin-top: 1em;
-  }
-
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
-  }
-
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  .btn-primary {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-
-  .btn-group-lg > .btn,
-  .btn-lg {
-    padding: 0.5rem 1rem;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    border-radius: 0.3rem;
-  }
-
-  .btn-block {
-    display: block;
-    width: 100%;
-    margin-top: 2rem !important;
-  }
-
-  .btn:not(:disabled):not(.disabled) {
-    cursor: pointer;
-  }
-
-  .btn {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
-      border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  }
-`;
-
-class Login extends WeElement {
   render() {
-    return h(
-      StyledComponents,
-      null,
-      h(
-        "div",
-        {
-          className: "login"
-        },
-        h(
-          "form",
-          {
-            className: "form-signin"
-          },
-          h(
-            "h3",
-            {
-              className: "h3 mb-3 font-weight-normal"
-            },
-            "\u9178\u83DC\u9C7C--\u5B66\u5458\u540E\u53F0\u7CFB\u7EDF"
-          ),
-          h(
-            "label",
-            {
-              className: "sr-only"
-            },
-            "Email address"
-          ),
-          h("input", {
-            type: "email",
-            id: "inputEmail",
-            className: "form-control idname",
-            placeholder: "\u8EAB\u4EFD\u8BC1\u53F7\u7801/\u5B66\u53F7",
-            required: ""
-          }),
-          h(
-            "label",
-            {
-              className: "sr-only"
-            },
-            "Password"
-          ),
-          h("input", {
-            type: "password",
-            id: "inputPassword",
-            className: "form-control",
-            placeholder: "\u5BC6\u7801",
-            required: ""
-          }),
-          h(
-            "button",
-            {
-              className: "btn btn-lg btn-primary btn-block",
-              type: "submit"
-            },
-            "\u767B\u5F55"
-          ),
-          h(
-            "p",
-            {
-              className: "mt-5 mb-3 text-muted"
-            },
-            "\xA9 2010-2019"
-          )
-        )
-      )
-    );
-  }
+    const { getFieldDecorator } = this.props.form;
+    return (
+      <div>
+        <div className={styles.loginbox}>
+          <div className={styles.frombox}>
+            <div style={{ textAlign: 'center',paddingBottom:'10px', }}>
+              <h3 style={{borderBottom:'1px solid #d9d9d9',lineHeight:'40px',}}>酸菜鱼--学生后台系统</h3>
+            </div>
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      title: "react"
-    };
+            <Form onSubmit={this.handleSubmit} className="login-form">
+              <Form.Item>
+                {getFieldDecorator('username', {
+                  rules: [{ required: true, message: 'Please input your username!' }],
+                })(
+                  <Input
+                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    placeholder="用户名/学号"
+                  />,
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator('password', {
+                  rules: [{ required: true, message: 'Please input your Password!' }],
+                })(
+                  <Input
+                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                    type="password"
+                    placeholder="登录密码"
+                  />,
+                )}
+              </Form.Item>
+              <Form.Item>
+                {/* {getFieldDecorator('remember', {
+                  valuePropName: 'checked',
+                  initialValue: true,
+                })(<Checkbox>Remember me</Checkbox>)}
+                <a className="login-form-forgot" href="">
+                  Forgot password
+          </a> */}
+                <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>
+                  登录
+          </Button>
+                {/* Or <a href="">register now!</a> */}
+              </Form.Item>
+            </Form>
+          </div>
+        </div>
+      </div>
+    )
   }
-
-  componentDidMount() {}
 }
 
-Login.css = `
-  /* CSS */
-  body {}
 
-  html,
-  body,
-  #root {
-    background-color: #000;
-  }
-
-  .login {
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    background: #f9f9f9;
-
-  }
-
-  p {
-    color: #000;
-  }
-
-  .form-signin {
-    width: 100%;
-    max-width: 330px;
-    padding: 15px;
-    height: 300px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    border: 1px solid #e5e5e5;
-    box-shadow: 0 5px 20px 0 #ddd;
-  }
-
-  .font-weight-normal {
-    font-weight: 400 !important;
-  }
-
-  .mb-3,
-  .my-3 {
-    margin-bottom: 1rem !important;
-    text-align: center;
-    color: #478fca !important;
-    font-weight: normal;
-  }
-
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    -webkit-clip-path: inset(50%);
-    clip-path: inset(50%);
-    border: 0;
-  }
-
-  label {
-    display: inline-block;
-    margin-bottom: .5rem;
-  }
-
-  .form-control {
-    display: block;
-    width: 100%;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    /* border-radius: .25rem; */
-    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-    margin-top: 1em;
-
-  }
-
-  .form-signin .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 16px;
-  }
-
-  .form-signin input[type="email"] {
-    margin-bottom: -1px;
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  .btn-primary {
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-  }
-
-  .btn-group-lg>.btn,
-  .btn-lg {
-    padding: .5rem 1rem;
-    font-size: 1.25rem;
-    line-height: 1.5;
-    border-radius: .3rem;
-  }
-
-  .btn-block {
-    display: block;
-    width: 100%;
-    margin-top: 2rem !important;
-  }
-
-  .btn:not(:disabled):not(.disabled) {
-    cursor: pointer;
-  }
-
-  .btn {
-    display: inline-block;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
-  }
-
-`;
-export default Login;
+export default Login = Form.create({ name: 'normal_login' })(Login);

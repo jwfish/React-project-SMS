@@ -1,9 +1,17 @@
 import React from 'react';
 import { Router, Route, Switch, Redirect } from 'dva/router';
 
+
+
+
 import IndexPage from './routes/IndexPage';
 // 登录页面
 import Login from './routes/Login/Login'
+
+
+
+
+// console.log(React);
 
 function RouterConfig({ history }) {
   return (

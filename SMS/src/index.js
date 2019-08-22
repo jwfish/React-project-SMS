@@ -1,5 +1,12 @@
+import React from 'react';
+import axios from 'axios'
+
 import dva from 'dva';
 import './index.css';
+
+React.$axios = axios;
+
+
 
 // 1. Initialize
 const app = dva();

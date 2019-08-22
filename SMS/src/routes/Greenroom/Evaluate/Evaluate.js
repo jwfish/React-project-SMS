@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, Icon } from 'antd';
+import { Alert } from 'antd';
 
 import { Table } from 'antd';
 
