@@ -105,7 +105,61 @@ router.get('/insertweekly', async function (req, res, next) {
 });
 
 
+//交费详情
+router.get('/moneydetail', async function (req, res, next) {
 
+  //查询学生交费信息
+  let data = await find('money');
+  console.log(data);
+  res.send(data)
+});
+
+
+//考试列表
+router.get('/exam', async function (req, res, next) {
+
+  //查询学生交费信息
+  let data = await find('exam');
+  console.log(data);
+  res.send(data)
+});
+
+
+//获取技术问题列表
+router.get('/technology', async function (req, res, next) {
+
+  let data = await find('technology');
+  console.log(data);
+  res.json({
+    data
+  })
+});
+
+//插入技术问题
+router.get('/inserttechnology', async function (req, res, next) {
+  let {
+    name,
+    question,
+    time
+
+  } = url.parse(req.url, true).query;
+
+  let data = await insert('technology', [{
+    name: name,
+    question: question,
+    time: time,
+    reply: '暂无'
+  }]);
+  console.log(data);
+  res.send(data)
+});
+
+//请假列表获取
+router.get('/leave', async function (req, res, next) {
+  let data = await find('leave');
+  console.log(data);
+  res.send(data)
+});
 
 
 module.exports = router;

@@ -7,35 +7,52 @@ import styles from './Moneydetail.css'
 const columns = [
     {
         title: '标题',
-        dataIndex: 'name', align: 'center'
+        dataIndex: 'title',
+        align: 'center'
     },
     {
         title: '金额',
-        dataIndex: 'age', align: 'center'
+        dataIndex: 'sum',
+        align: 'center'
     },
     {
         title: '收据号/订单号',
-        dataIndex: 'address', align: 'center'
+        dataIndex: 'orderID',
+        align: 'center'
     }, {
-        title: '收据编号', align: 'center'
+        title: '收据编号',
+        dataIndex: '',
+        align: 'center'
     }, {
-        title: '入账地点', align: 'center'
+        title: '入账地点',
+        dataIndex: 'site',
+        align: 'center'
     }, {
-        title: '类型', align: 'center'
+        title: '类型',
+        dataIndex: 'type',
+        align: 'center'
     }, {
-        title: '操作人', align: 'center'
+        title: '操作人',
+        dataIndex: 'operator',
+        align: 'center'
     }, {
-        title: '状态', align: 'center'
+        title: '状态',
+        dataIndex: 'states',
+        align: 'center'
     }, {
-        title: '添加时间', align: 'center'
+        title: '添加时间',
+        dataIndex: 'time',
+        align: 'center'
     }, {
-        title: '操作', align: 'center'
+        title: '操作',
+        align: 'center'
     }
 ];
 
 const columns2 = [
     {
-        title: '标题', align: 'center'
+        title: '标题',
+        align: 'center'
     },
     {
         title: '金额', align: 'center'
@@ -56,30 +73,31 @@ const columns2 = [
 
 
 
-const data = [
-    {
-        key: '1',
-        name: 'John',
-        age: 32,
-        address: 'New York',
-    },
-    {
-        key: '2',
-        name: 'Jim ',
-        age: 42,
-        address: 'London ',
-    },
-    {
-        key: '3',
-        name: 'Joe ',
-        age: 32,
-        address: 'Sidney ',
-    },
-];
+
 
 const data2 = []
 export default class Moneydetail extends Component {
+    state = {
+        data: [
+            // {
+            //     key: '1',
+            //     title: 'huahua 学费',
+            //     sum: 800,
+            //     orderID: '0755316',
+            //     site: '广州', type: '支付宝', operator: '老黄财务', states: '审核成功', time: '2019-04-16 19:55:13'
+            // }
+        ],
+        data2: []
+    }
 
+    async componentWillMount() {
+        await React.$axios('http://localhost:3000/moneydetail').then((resolve) => {
+            // console.log(resolve.data);
+            this.setState({
+                data:resolve.data
+            })
+        })
+    }
     render() {
         return (
             <div>
@@ -92,8 +110,8 @@ export default class Moneydetail extends Component {
                     }}>交费详情</h3>
                 </div>
                 <div style={{ marginTop: "10px" }}>
-                    <Table bordered columns={columns} dataSource={data} size="middle"
-                         rowClassName={(record, index) => {//隔行变色
+                    <Table bordered columns={columns} dataSource={this.state.data}  rowKey="_id" size="middle"
+                        rowClassName={(record, index) => {//隔行变色
                             let className = styles.lightRow;
                             if (index % 2 === 1) className = styles.darkRow;
                             return className;
@@ -105,7 +123,9 @@ export default class Moneydetail extends Component {
                             </p>)
                         }}
 
-
+                        locale={
+                            { emptyText: <div>暂无数据</div> }
+                        }
                     />
                 </div>
 
@@ -123,7 +143,7 @@ export default class Moneydetail extends Component {
                     <Table
                         bordered
                         columns={columns2}
-                        dataSource={data2}
+                        dataSource={this.state.data2}
                         size="middle"
                         rowClassName={(record, index) => {//隔行变色
                             let className = styles.lightRow;

@@ -15,19 +15,19 @@ const columns = [
     },
     {
         title: '评价对象',
-        dataIndex: 'address',
+        dataIndex: '',
     }, {
         title: '讲师',
-        dataIndex: 'address',
+        dataIndex: '',
     }, {
         title: '班主任',
-        dataIndex: 'address',
+        dataIndex: '',
     }, {
         title: '就业老师',
-        dataIndex: 'address',
+        dataIndex: '',
     }, {
         title: '操作',
-        dataIndex: 'address',
+        dataIndex: '',
     },
 ];
 const data = [
@@ -44,16 +44,17 @@ export default class Evaluate extends Component {
         return (
             <div>
                 <div style={{ paddingBottom: '30px', borderBottom: '1px dotted #e2e2e2' }}>
-                    <Alert message="Success Tips" type="success" showIcon></Alert>
+                    <Alert message="您的满意是对我们最好的评价，您的批评是给我们最大的改进动力，欢迎同学对千锋提出宝贵的批评和建议。" type="success" showIcon></Alert>
                 </div>
 
-                <div style={{ marginTop: '30px' }}>
+                <div style={{ marginTop: '10px' }}>
 
                     <Table
+                        rowKey="_id"
                         bordered
                         columns={columns}
                         dataSource={data}
-                        size="small"
+                        size="middle"
                         pagination={false}
                         onHeaderRow={(column, index) => {
                             // console.log(column, index);

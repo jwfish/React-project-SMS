@@ -1,0 +1,14 @@
+.lightRow {
+  background-color: #f9f9f9;
+}
+
+.darkRow {
+  background-color: #fff;
+}
+
+
+th,
+.ant-table-body {
+  background-image: linear-gradient(to bottom, #f8f8f8 0, #ececec 100%) !important;
+  text-align: center !important;
+}

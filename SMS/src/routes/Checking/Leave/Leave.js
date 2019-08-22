@@ -25,37 +25,38 @@ const columns = [
         align: 'center'
     },
     {
-        title: '类型',
-        dataIndex: 'leixing', align: 'center'
+        title: '请假理由',
+        dataIndex: 'reason',
+        align: 'center'
     },
     {
-        title: '扣除（分数）',
-        dataIndex: 'scores', align: 'center'
+        title: '班主任审批',
+        dataIndex: 'classteacher',
+        align: 'center'
 
     }, {
-        title: '剩余分数',
-        dataIndex: 'total', align: 'center'
+        title: '讲师审批',
+        dataIndex: 'lecturer',
+        align: 'center'
 
     }, {
-        title: '理由',
-        dataIndex: 'reason', align: 'center'
+        title: '请假时间',
+        dataIndex: 'timeframe',
+        align: 'center'
     }, {
-        title: '操作人',
-        dataIndex: 'people', align: 'center'
-    }, {
-        title: '操作时间',
-        dataIndex: 'time', align: 'center'
+        title: '创建时间',
+        dataIndex: 'time',
+        align: 'center'
     }
 ];
 const data = [
     {
         key: '1',
         name: '酸菜鱼',
-        leixing: '事假',
-        scores: 5,
-        total: 95,
         reason: '喉咙发炎',
-        people: '老胡',
+        classteacher: '通过',
+        lecturer: '通过',
+        timeframe: '2019-06-21 18:00:00~2019-06-22 18:00:00',
         time: '2019-06-24 10:49:03'
     }
 ];

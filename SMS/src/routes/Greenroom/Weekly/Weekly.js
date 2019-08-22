@@ -9,11 +9,10 @@ import {
 } from 'antd';
 import { Table } from 'antd';
 import styles from './Weekly.css';
-
+//全局消息的全局配置
 message.config({
-    top: 300,
-
-    maxCount: 3,
+    top: 300,//提醒位置
+    maxCount: 1//最多只能显示一条全局提醒
 });
 
 const { TextArea } = Input;
@@ -46,7 +45,7 @@ const columns = [
 
 
 
-console.log(new Date().toLocaleString());//获取到现在的时间戳
+// console.log(new Date().toLocaleString());//获取到现在的时间戳
 class Weekly extends Component {
 
     state = {
@@ -63,8 +62,8 @@ class Weekly extends Component {
         //周报标题
         title: '',
         //周报内容
-        textarea: ''
-        , name: ''
+        textarea: '', 
+        name: '酸菜鱼'
     }
 
     // 确认按钮 发送插入数据
@@ -72,7 +71,7 @@ class Weekly extends Component {
         // console.log(this.state.name);
         const hide = message.loading('正在提交中，请稍后', 0)
         // Dismiss manually and asynchronously
-        setTimeout(hide, 1500);
+        setTimeout(hide, 2000);
         React.$axios('http://localhost:3000/insertweekly',
             {
                 params: {
@@ -82,9 +81,9 @@ class Weekly extends Component {
                     states: '未查看',
                     time: new Date().toLocaleString()
                 }
-            }).then((resolve) => {
+            }).then(async (resolve) => {
 
-                React.$axios('http://localhost:3000/weekly').then((resolve) => {
+                await React.$axios('http://localhost:3000/weekly').then((resolve) => {
 
                     this.setState({
                         data: resolve.data.data,
@@ -175,7 +174,7 @@ class Weekly extends Component {
                         columns={columns}
                         dataSource={this.state.data}
                         bordered
-                        size="small"//尺寸小
+                        size="middle"//尺寸小
                         // title={() => 'Header'}
                         footer={() => ''}
                         rowClassName={(record, index) => {//隔行变色

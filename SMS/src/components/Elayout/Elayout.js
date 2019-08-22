@@ -72,8 +72,8 @@ export default class Elayout extends Component {
                         <Sider width={200} style={{ background: '#fff' }}>
                             <Menu
                                 mode="inline"
-                                defaultSelectedKeys={['0']}
-                                defaultOpenKeys={['sub1']}
+                                // defaultSelectedKeys={['0']}
+                                // defaultOpenKeys={['sub1']}
                                 style={{ height: '100%', borderRight: 0 }}
                             >
                                 <SubMenu

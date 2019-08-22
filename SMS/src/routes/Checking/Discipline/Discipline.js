@@ -55,7 +55,7 @@ export default class Discipline extends Component {
 
                 </div>
                 <div style={{ marginTop: "10px" }}>
-                    <Table bordered columns={columns} dataSource={data} align="center" size="small"
+                    <Table bordered columns={columns} dataSource={data} align="center" size="middle"
                         rowClassName={
                             (record, index) => {//隔行变色，类名加了，没办法加样式
                                 let className = 'light'

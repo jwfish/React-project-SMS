@@ -1,10 +1,11 @@
 .timefl {
   display: flex
 }
+
 .lightRow {
   background-color: #f9f9f9;
 }
 
 .darkRow {
-  background-color: #ddd;
+  background-color: #fff;
 }
