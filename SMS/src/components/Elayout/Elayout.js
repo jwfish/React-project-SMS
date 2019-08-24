@@ -3,6 +3,9 @@ import { Route, Switch, Link } from 'dva/router';
 
 
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Popconfirm, message } from 'antd';
+import { connect } from 'dva';
+
 
 import Complaint from '../../routes/Greenroom/Complain/Complain';
 import Technology from '../../routes/Greenroom/Technology/Technology';
@@ -19,9 +22,21 @@ import Inquiry from '../../routes/Greenroom/Inquiry/Inquiry'
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
+const routes = [
+
+    {
+        path: 'home',
+        breadcrumbName: 'home',
+
+    }, {
+        path: 'Complaint',
+        breadcrumbName: 'Complaint',
+    }
+]
 
 
-export default class Elayout extends Component {
+
+class Elayout extends Component {
 
     state = {
         student: [{
@@ -58,22 +73,41 @@ export default class Elayout extends Component {
             url: '/home/Inquiry'
         }]
     }
+    confirm() {
+        console.log(this);
+        message.info('已退出登录');
+
+        this.props.history.push("/login");
+    }
+
+
+    itemRender(route, params, routes, paths) {
+        // const last = routes.indexOf(route) === routes.length - 1;
+        return <span>{route.breadcrumbName}</span>
+
+    }
+
+   
     render() {
         return (
             <div style={{ height: '100%', position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}>
-                <Layout style={{ height: '100%',overflow: 'auto' }}>
+                <Layout style={{ height: '100%', overflow: 'auto' }}>
                     <Header className="header" style={{ background: '#428bca', height: '50px' }}>
-                        <div className="logo" style={{ lineHeight: '50px' }}>
+                        <div className="logo" style={{ lineHeight: '50px', float: 'left' }}>
                             <img style={{ height: '50px' }} src="http://stu.1000phone.net/Public/assets/css/images/logo.png?1566207048" alt="" />
                         </div>
+                        <Popconfirm placement="bottom" title="确认退出登录？" onConfirm={this.confirm.bind(this)} okText="确定" cancelText="取消" >
+                            <a href="" style={{ float: 'right', color: '#fff', lineHeight: '50px' }}>
 
+                                huahua ▼</a>
+                        </Popconfirm>
                     </Header>
                     <Layout>
                         <Sider width={200} style={{ background: '#fff' }}>
                             <Menu
                                 mode="inline"
-                                // defaultSelectedKeys={['0']}
-                                // defaultOpenKeys={['sub1']}
+                                defaultSelectedKeys={['5']}
+                                defaultOpenKeys={['sub1']}
                                 style={{ height: '100%', borderRight: 0 }}
                             >
                                 <SubMenu
@@ -84,13 +118,14 @@ export default class Elayout extends Component {
                                             学员后台
                                         </span>
                                     }
+
                                 >
                                     {this.state.student.map((item, index) => {
                                         return (<Menu.Item key={index}>
                                             <Link to={item.url}>
                                                 {item.title}
                                             </Link>
-                                        </Menu.Item>)
+                                        </Menu.Item >)
                                     })}
                                     {/* <Menu.Item key="1">option1</Menu.Item>
                                     <Menu.Item key="2">option2</Menu.Item>
@@ -116,10 +151,10 @@ export default class Elayout extends Component {
                             </Menu>
                         </Sider>
                         <Layout style={{ padding: '0 24px 24px' }}>
-                            <Breadcrumb style={{ margin: '16px 0' }}>
+                            <Breadcrumb style={{ margin: '16px 0' }} itemRender={this.itemRender} routes={routes} >
                                 <Breadcrumb.Item>Home</Breadcrumb.Item>
-                                <Breadcrumb.Item>List</Breadcrumb.Item>
-                                <Breadcrumb.Item>App</Breadcrumb.Item>
+                                <Breadcrumb.Item>complaint</Breadcrumb.Item>
+
                             </Breadcrumb>
                             <Content
                                 style={{
@@ -157,3 +192,7 @@ export default class Elayout extends Component {
         )
     }
 }
+
+export default connect(({ products }) => ({
+    products,
+}))(Elayout)

@@ -62,37 +62,41 @@ class Weekly extends Component {
         //周报标题
         title: '',
         //周报内容
-        textarea: '', 
+        textarea: '',
         name: '酸菜鱼'
     }
 
     // 确认按钮 发送插入数据
     handbtn() {
-        // console.log(this.state.name);
-        const hide = message.loading('正在提交中，请稍后', 0)
-        // Dismiss manually and asynchronously
-        setTimeout(hide, 2000);
-        React.$axios('http://localhost:3000/insertweekly',
-            {
-                params: {
-                    name: this.state.name,
-                    title: this.state.title,
-                    textarea: this.state.textarea,
-                    states: '未查看',
-                    time: new Date().toLocaleString()
-                }
-            }).then(async (resolve) => {
+        console.log(this.state.name);
+        if (this.title && this.textarea) {
+            const hide = message.loading('正在提交中，请稍后', 0)
+            // Dismiss manually and asynchronously
+            setTimeout(hide, 2000);
+            React.$axios('http://localhost:3000/insertweekly',
+                {
+                    params: {
+                        name: this.state.name,
+                        title: this.state.title,
+                        textarea: this.state.textarea,
+                        states: '未查看',
+                        time: new Date().toLocaleString()
+                    }
+                }).then(async (resolve) => {
 
-                await React.$axios('http://localhost:3000/weekly').then((resolve) => {
+                    await React.$axios('http://localhost:3000/weekly').then((resolve) => {
 
-                    this.setState({
-                        data: resolve.data.data,
-                        //拿到学员名字，如果没有数据就给默认值
-                        name: resolve.data.data[0].name ? resolve.data.data[0].name : "还没吃酸菜鱼"
+                        this.setState({
+                            data: resolve.data.data,
+                            //拿到学员名字，如果没有数据就给默认值
+                            name: resolve.data.data[0].name ? resolve.data.data[0].name : "还没吃酸菜鱼"
+                        })
                     })
+                    message.success('提交成功！');
                 })
-                message.success('提交成功！');
-            })
+        } else {
+            message.warning('请输入需要提交的内容再提交！')
+        }
     }
 
     //获取标题内容
@@ -115,7 +119,7 @@ class Weekly extends Component {
     }
 
     //初始化时发送请求数据
-    async  componentWillMount() {
+    async  componentDidMount() {
 
         await React.$axios('http://localhost:3000/weekly').then((resolve) => {
 
@@ -127,6 +131,16 @@ class Weekly extends Component {
         })
 
     }
+
+
+    //点击返回，回到上个页面
+    fanhui() {
+        this.props.history.go(-1)
+        console.log(1);
+    }
+
+
+
     render() {
         return (
             <div>
@@ -158,7 +172,11 @@ class Weekly extends Component {
                                 <Icon type="check" />
                                 确定
                              </Button>
-                            <Button style={{ backgroundColor: "#abbac3", borderColor: "#abbac3", color: "#fff", marginLeft: "100px" }} size="large">
+
+
+                            <Button style={{ backgroundColor: "#abbac3", borderColor: "#abbac3", color: "#fff", marginLeft: "100px" }} size="large" onClick={(event) => this.fanhui()}>
+
+
                                 <Icon type="undo" />
                                 返回
                               </Button>

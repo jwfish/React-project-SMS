@@ -32,20 +32,32 @@ const columns = [
         dataIndex: 'time', align: 'center'
     }
 ];
-const data = [
-    {
-        key: '1',
-        name: '酸菜鱼',
-        leixing: '事假',
-        scores: 5,
-        total: 95,
-        reason: '喉咙发炎',
-        people: '老胡',
-        time: '2019-06-24 10:49:03'
-    }
-];
+
 
 export default class Discipline extends Component {
+
+    state = {
+        data: [
+            // {
+            //     key: '1',
+            //     name: '酸菜鱼',
+            //     leixing: '事假',
+            //     scores: 5,
+            //     total: 95,
+            //     reason: '喉咙发炎',
+            //     people: '老胡',
+            //     time: '2019-06-24 10:49:03'
+            // }
+        ]
+    }
+
+    async  componentDidMount() {
+        let data = await React.$axios('http://localhost:3000/discipline')
+        console.log(data.data);
+        this.setState({
+            data: data.data
+        })
+    }
     render() {
         return (
             <div>
@@ -55,7 +67,12 @@ export default class Discipline extends Component {
 
                 </div>
                 <div style={{ marginTop: "10px" }}>
-                    <Table bordered columns={columns} dataSource={data} align="center" size="middle"
+                    <Table
+                        bordered columns={columns}
+                        dataSource={this.state.data}
+                        align="center"
+                        size="middle"
+                        rowKey="_id"
                         rowClassName={
                             (record, index) => {//隔行变色，类名加了，没办法加样式
                                 let className = 'light'
@@ -70,9 +87,11 @@ export default class Discipline extends Component {
 
                         pagination={false}//分页器
 
-                        footer={() => <p></p>
+                        // footer={() => <p></p>
+                        // }
+                        locale={
+                            { emptyText: <p></p> }
                         }
-
 
                     />
                 </div>

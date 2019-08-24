@@ -1,0 +1,26 @@
+.pic>span>img {
+  width: 180px;
+  height: 200px;
+}
+
+.info {
+  color: #336199;
+  background-color: #edf3f4;
+  width: 110px;
+  text-align: right;
+  padding: 6px 10px 6px 0;
+  float: left;
+}
+
+
+
+.infovalue {
+  padding: 6px 4px 6px 6px;
+  /* margin-left: 120px; */
+  float: left;
+  width: calc(100% - 110px);
+  /* min-width: 500px; */
+  border-bottom: 1px dotted #d5e4f1;
+}
+
+

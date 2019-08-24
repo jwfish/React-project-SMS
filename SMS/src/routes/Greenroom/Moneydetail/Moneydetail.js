@@ -75,7 +75,7 @@ const columns2 = [
 
 
 
-const data2 = []
+// const data2 = []
 export default class Moneydetail extends Component {
     state = {
         data: [
@@ -87,14 +87,22 @@ export default class Moneydetail extends Component {
             //     site: '广州', type: '支付宝', operator: '老黄财务', states: '审核成功', time: '2019-04-16 19:55:13'
             // }
         ],
-        data2: []
+        data2: [],
+        //学费总额
+        schooling: 0
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         await React.$axios('http://localhost:3000/moneydetail').then((resolve) => {
-            // console.log(resolve.data);
+            console.log(resolve.data);
+            let arrsum = 0;
+            resolve.data.map((item) => {
+                arrsum += item.sum * 1
+            })
+            // console.log(arrsum);
             this.setState({
-                data:resolve.data
+                data: resolve.data,
+                schooling: arrsum
             })
         })
     }
@@ -110,7 +118,7 @@ export default class Moneydetail extends Component {
                     }}>交费详情</h3>
                 </div>
                 <div style={{ marginTop: "10px" }}>
-                    <Table bordered columns={columns} dataSource={this.state.data}  rowKey="_id" size="middle"
+                    <Table bordered columns={columns} dataSource={this.state.data} rowKey="_id" size="middle"
                         rowClassName={(record, index) => {//隔行变色
                             let className = styles.lightRow;
                             if (index % 2 === 1) className = styles.darkRow;
@@ -118,7 +126,7 @@ export default class Moneydetail extends Component {
                         }}
                         pagination={false}//分页器
                         footer={() => {
-                            return (<p style={{ marginBottom: '0' }}>学费总额：<span>200</span>
+                            return (<p style={{ marginBottom: '0' }}>学费总额：￥<span>{this.state.schooling}</span>
                                 <li>(交费-退费)</li>
                             </p>)
                         }}

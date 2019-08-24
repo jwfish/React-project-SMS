@@ -5,7 +5,6 @@ import {
   Form,
   Input,
   Button,
-  Radio,
   Icon, Table, message
 } from 'antd';
 import styles from './Technology.css';
@@ -95,6 +94,12 @@ export default class Technology extends Component {
 
   }
 
+
+  //点击返回，回到上个页面
+  fanhui() {
+    this.props.history.go(-1)
+    console.log(1);
+  }
   render() {
 
 
@@ -117,7 +122,7 @@ export default class Technology extends Component {
                 <Icon type="check" />
                 确定
             </Button>
-              <Button style={{ backgroundColor: "#abbac3", borderColor: "#abbac3", color: "#fff", marginLeft: "100px" }} size="large">
+              <Button style={{ backgroundColor: "#abbac3", borderColor: "#abbac3", color: "#fff", marginLeft: "100px" }} size="large" onClick={(event) => this.fanhui()}>
                 <Icon type="undo" />
                 返回
             </Button>
@@ -144,8 +149,8 @@ export default class Technology extends Component {
               { emptyText: <div></div> }
             }
 
-           
-      />
+
+          />
         </div>
       </div>
     )

@@ -154,6 +154,8 @@ router.get('/inserttechnology', async function (req, res, next) {
   res.send(data)
 });
 
+
+
 //请假列表获取
 router.get('/leave', async function (req, res, next) {
   let data = await find('leave');
@@ -161,5 +163,43 @@ router.get('/leave', async function (req, res, next) {
   res.send(data)
 });
 
+//插入请假问题
+router.get('/insertleave', async function (req, res, next) {
+  let {
+    name,
+    reason,
+    timeframe,
+    time
+
+  } = url.parse(req.url, true).query;
+
+  let data = await insert('leave', [{
+    name: name,
+    reason: reason,
+    classteacher: '未审批',
+    lecturer: '未审批',
+    timeframe: timeframe,
+    time: time
+  }]);
+  console.log(data);
+  res.send(data)
+});
+
+
+//违纪列表获取
+router.get('/discipline', async function (req, res, next) {
+  let data = await find('discipline');
+  console.log(data);
+  res.send(data)
+});
+
+
+
+//获取我的资料
+router.get('/material', async function (req, res, next) {
+  let data = await find('material');
+  console.log(data);
+  res.send(data)
+});
 
 module.exports = router;

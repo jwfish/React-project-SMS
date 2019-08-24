@@ -1,10 +1,20 @@
 import React, {
   Component
 } from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, message } from 'antd';
 import styles from './Login.css'
 import Qs from 'qs'
+// import { connect } from 'dva';
 class Login extends Component {
+  state = {
+    loading: false,
+    loadtext: '登录中 ···'
+
+  };
+
+  enterLoading = () => {
+    this.setState({ loading: true });
+  };
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields(async (err, values) => {
@@ -27,10 +37,14 @@ class Login extends Component {
             console.log('登录成功');
             document.cookie = "tokenpw=" + resolve.data.token;
             //编程时导航跳转
-            this.props.history.push("/home/complaint");
+            this.props.history.push("/home/Index");
           } else {
             console.log('登录失败');
           }
+        }).catch((reject) => {
+          // console.log(reject);
+          // console.log('登录不成功');
+          message.warning('登录发生错误' + reject)
         })
 
         // console.log(data);
@@ -49,8 +63,8 @@ class Login extends Component {
       <div>
         <div className={styles.loginbox}>
           <div className={styles.frombox}>
-            <div style={{ textAlign: 'center',paddingBottom:'10px', }}>
-              <h3 style={{borderBottom:'1px solid #d9d9d9',lineHeight:'40px',}}>酸菜鱼--学生后台系统</h3>
+            <div style={{ textAlign: 'center', paddingBottom: '10px', }}>
+              <h3 style={{ borderBottom: '1px solid #d9d9d9', lineHeight: '40px', }}>酸菜鱼--学生后台系统</h3>
             </div>
 
             <Form onSubmit={this.handleSubmit} className="login-form">
@@ -83,9 +97,10 @@ class Login extends Component {
                 <a className="login-form-forgot" href="">
                   Forgot password
           </a> */}
-                <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}>
-                  登录
-          </Button>
+                <Button type="primary" htmlType="submit" className="login-form-button" style={{ width: '100%' }}
+                  loading={this.state.loading} onClick={this.enterLoading}>
+                  {this.state.loading ? this.state.loadtext : '登录'}
+                </Button>
                 {/* Or <a href="">register now!</a> */}
               </Form.Item>
             </Form>
