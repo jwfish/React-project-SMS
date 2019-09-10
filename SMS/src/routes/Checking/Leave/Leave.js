@@ -100,9 +100,7 @@ class Leave extends Component {
         console.log(e.target.value);
         this.setState({
             textarea: e.target.value,
-
         })
-
     }
 
     async  componentDidMount() {

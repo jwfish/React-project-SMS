@@ -157,8 +157,6 @@ class Weekly extends Component {
                         </Form.Item>
                         <Form.Item label="周报标题" labelCol={{ span: 4 }} wrapperCol={{ span: 14 }}>
                             <Input placeholder="请填写周报标题" style={{ cursor: "default" }} onChange={this.getcont} />
-
-
                         </Form.Item>
                         <Form.Item label="周报内容：" labelCol={{ span: 4 }} wrapperCol={{ span: 14 }}>
                             <TextArea rows={4} placeholder="请输入周报内容" onChange={this.getArea} />
@@ -173,15 +171,12 @@ class Weekly extends Component {
                                 确定
                              </Button>
 
-
                             <Button style={{ backgroundColor: "#abbac3", borderColor: "#abbac3", color: "#fff", marginLeft: "100px" }} size="large" onClick={(event) => this.fanhui()}>
 
 
                                 <Icon type="undo" />
                                 返回
                               </Button>
-
-
                         </div>
                     </Form>
                 </div>
